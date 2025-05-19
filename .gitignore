@@ -1,0 +1,30 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+.env
+
+# Data and models
+Breast_cancer_patient/
+breast_data/
+*.pth
+*.h5
+*.json
+
+*.ipynb_checkpoints/
+
+# Temporary files
+nohup.out
+*.zip
+
+# Screenshots (include explicitly)
+!Screenshot*.jpg
+
+# Misc
+.DS_Store
+kaggle.json
+kaggle (1).json
