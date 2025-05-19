@@ -1,146 +1,213 @@
-# Breast Cancer Detection System
 
-The **Breast Cancer Detection System** is a deep learning application designed to aid early breast cancer detection through image analysis. Using **PyTorch** and **Streamlit**, it visualizes breast tissue and classifies image patches as cancerous or non-cancerous, offering insights for medical professionals. This project showcases my expertise in deep learning, data processing, and user-friendly interface design, targeting healthcare providers, researchers, and data science teams.
 
-## Table of Contents
-- [Overview](#overview)
-- [Features](#features)
-- [Technical Details](#technical-details)
-- [Skills Demonstrated](#skills-demonstrated)
-- [Setup Instructions](#setup-instructions)
-- [Usage](#usage)
-- [Limitations](#limitations)
-- [Notebooks](#notebooks)
-- [Contact](#contact)
+---
 
-## Overview
+# 🩺 Breast Cancer Detection System
 
-This system analyzes breast tissue images to identify cancerous regions, supporting early diagnosis. Built on a **ResNet18** model (PyTorch), it processes patient data, generates tissue visualizations, and predicts cancer likelihood. A **Streamlit** interface enables intuitive interaction, making it accessible for medical professionals to explore results and classify new images.
+The **Breast Cancer Detection System** is a deep learning web application that assists in **early breast cancer diagnosis** through medical image analysis. Built using **PyTorch** and **Streamlit**, it empowers healthcare professionals with interactive tissue visualizations and image classification tools. This project highlights my capabilities in **AI for healthcare**, **computer vision**, and **intuitive UI/UX design**.
 
-Key highlights:
-- Deploying deep learning for medical imaging.
-- Analyzing complex datasets with **Pandas** and **NumPy**.
-- Building interactive interfaces with **Streamlit**.
-- Creating visualizations with **Matplotlib** and **Seaborn**.
+---
 
-## Features
+## 📋 Table of Contents
 
-### 1. Tissue Visualization
-- **Interactive Display**: Select a patient folder to view:
-  - **Tissue Slice**: Composite image of tissue patches.
-  - **Cancer Mask**: Red overlay highlighting cancerous areas.
-  - **Heatmap**: Probability map of cancer risk (yellow-orange-red colormap).
-- **Error Handling**: Lists unprocessed patches in an expandable section.
-- **User Experience**: Features loading spinners and clear feedback.
+* [🧠 Overview](#-overview)
+* [🎥 Demo](#-demo)
+* [✨ Features](#-features)
+* [⚙️ Technical Details](#-technical-details)
+* [🛠️ Skills Demonstrated](#-skills-demonstrated)
+* [🚀 Setup Instructions](#-setup-instructions)
+* [🖱️ Usage Guide](#-usage-guide)
+* [⚠️ Limitations](#️-limitations)
+* [📓 Notebooks](#-notebooks)
+* [📬 Contact](#-contact)
+
+---
+
+## 🧠 Overview
+
+This system processes breast tissue images to detect cancerous regions, supporting radiologists and researchers with early warning insights. Powered by a **ResNet18** deep learning model, it enables real-time tissue slice analysis and patch-level classification via a **Streamlit interface**.
+
+🔍 **Core Highlights**:
+
+* Deploys **CNN models** for medical imaging.
+* Processes complex datasets using **Pandas** and **NumPy**.
+* Offers interactive visualization via **Streamlit**.
+* Provides probability-based cancer risk assessment.
+
+---
+
+## 🎥 Demo
+
+📺 [Watch Demo on YouTube](https://www.youtube.com/watch?v=pXYgyJ3ne7A)
+*See real-time tissue analysis, patch prediction, and UI in action.*
+
+---
+
+## ✨ Features
+
+### 🔬 Tissue Visualization
+
+* **Tissue Slice** – Composite image of a patient's tissue patches.
+* **Cancer Mask** – Overlay showing predicted cancerous regions.
+* **Heatmap** – Visual risk prediction map (Yellow-Red scale).
+* **Expandable Logs** – View broken or unprocessed patches.
 
 ![Tissue Visualization](Screenshot%202025-05-19%20140634.jpg)
-*Visualization page showing tissue slice, cancer mask, and probability heatmap.*
 
-### 2. Patch Prediction
-- **Classification**: Upload a tissue patch (JPG, JPEG, PNG) to predict **Cancerous** or **Not Cancerous**.
-- **Confidence Scores**: Shows prediction confidence.
-- **Design**: Clean layout with image previews and styled results (green for non-cancerous, red for cancerous).
+---
+
+### 🖼️ Patch Prediction
+
+* Upload individual image patches (JPG/PNG).
+* Receive classification: **Cancerous** or **Not Cancerous**.
+* Displays confidence scores and styled results (red/green).
 
 ![Patch Prediction](Screenshot%202025-05-19%20140955.jpg)
-*Patch prediction page displaying an uploaded image and classification result.*
 
-## Technical Details
+---
 
-### Model
-- **Architecture**: Modified **ResNet18** (torchvision) for binary classification.
-- **Layers**: Custom fully connected layers (512, 256, 2) with ReLU, batch normalization, and dropout (0.5).
-- **Initialization**: Xavier uniform for stable training.
-- **Device**: Supports CPU/GPU with dynamic model loading.
+## ⚙️ Technical Details
 
-### Data Processing
-- **Dataset**: Patient data in `Breast_cancer_patient/` with `0` (non-cancerous) and `1` (cancerous) subfolders.
-- **Preprocessing**: **Pandas** parses filenames for coordinates (x, y) into DataFrames.
-- **Transforms**: **torchvision** resizes images to 50x50, normalizes, and applies random flips.
-- **Dataset**: Custom `BreastCancerDataset` for efficient **DataLoader** integration.
+### 🧩 Model Architecture
 
-### Visualization
-- **Reconstruction**: Grids patches using coordinates, with red cancer masks.
-- **Heatmap**: Maps predictions to a `YlOrRd` colormap via **Matplotlib**.
-- **Streamlit**: Interactive rendering with error details.
+* **Base**: ResNet18 (TorchVision)
+* **Custom Head**: Linear (512 → 256 → 2) with:
 
-### Interface
-- **Pages**: “Tissue Visualization” and “Patch Prediction” via sidebar navigation.
-- **UX**: Spinners, styled text, and responsive column layouts.
-- **Errors**: Warns on missing data or invalid uploads.
+  * ReLU
+  * Batch Normalization
+  * Dropout (p=0.5)
+* **Initialization**: Xavier Uniform
+* **Device Support**: CPU and GPU-compatible
 
-## Skills Demonstrated
-- **Deep Learning**: Building CNNs for medical imaging.
-- **PyTorch**: Custom models and data pipelines.
-- **Streamlit**: Interactive web apps for data science.
-- **Python**: Modular code with **Pandas**, **NumPy**, **Matplotlib**, **Seaborn**.
-- **Data Preprocessing**: Managing complex image datasets.
-- **Visualization**: Balancing technical and accessible visuals.
-- **Engineering**: Clear documentation and user-focused design.
+### 🧪 Data Pipeline
 
-## Setup Instructions
+* **Input Structure**: `Breast_cancer_patient/` → `0` (non-cancer) & `1` (cancer) folders
+* **Patch Coordinates**: Extracted with **Pandas**
+* **Transforms**: Resize (50×50), normalize, and flip
+* **Loader**: Custom `BreastCancerDataset` integrated with PyTorch’s DataLoader
 
-### Prerequisites
-- Python 3.8+
-- Git ([git-scm.com](https://git-scm.com))
-- Dependencies:
-  ```bash
-  pip install torch torchvision streamlit pandas numpy matplotlib seaborn scikit-learn pillow scikit-image tensorflow tqdm
+### 📊 Visualization Tools
 
-Installation
+* Reconstructs tissue slices using `x,y` coordinates
+* Cancer masks using `matplotlib` + transparency overlays
+* Heatmaps with `YlOrRd` colormap
+* Live interactivity with **Streamlit**
 
-Clone the repository:git clone https://github.com/AkinwandeSlim/breast-cancer-detection.git
+### 🧭 UI Navigation
+
+* **Sidebar Pages**:
+
+  * Tissue Visualization
+  * Patch Prediction
+* **User Feedback**: Spinners, alerts, and validation messages
+
+---
+
+## 🛠️ Skills Demonstrated
+
+* 🧠 **Deep Learning** – Custom CNNs for image classification
+* 🐍 **Python** – Clean, modular, scalable code
+* 🔥 **PyTorch** – Model building, training, evaluation
+* 🌐 **Streamlit** – Interactive web interface
+* 📊 **Data Analysis** – Preprocessing with Pandas, NumPy
+* 🎨 **Visualization** – Matplotlib, Seaborn
+* 📁 **Software Engineering** – Reproducibility, error handling, clean UI
+
+---
+
+## 🚀 Setup Instructions
+
+### ✅ Prerequisites
+
+* Python 3.8+
+* Git
+* Required Libraries:
+
+```bash
+pip install torch torchvision streamlit pandas numpy matplotlib seaborn scikit-learn pillow scikit-image tensorflow tqdm
+```
+
+### 📦 Installation
+
+```bash
+git clone https://github.com/AkinwandeSlim/breast-cancer-detection.git
 cd breast-cancer-detection
+```
 
+1. **Add Data & Model Files**:
 
-Add dataset and model:
-Place patient data in Breast_cancer_patient/ (subfolders 0, 1).
-Place model (.pth or _cuda.pth) in breast_data/.
-Note: Dataset/model not included due to privacy/size. Contact me for access.
+   * Place your patient image folders into `Breast_cancer_patient/`
+   * Place trained model (`model.pth` or `model_cuda.pth`) into `breast_data/`
 
+2. **Launch App**:
 
-Run:streamlit run breast_cancer_app.py
+```bash
+streamlit run breast_cancer_app.py
+```
 
+Visit `http://localhost:8501` in your browser.
 
-Opens at http://localhost:8501.
+---
 
+## 🖱️ Usage Guide
 
+### 🔬 Tissue Visualization
 
-Usage
-Tissue Visualization
+* Select a patient folder
+* Click **"Generate Visualization"**
+* View:
 
-Select a patient folder.
-Click “Generate Visualization” for tissue slice, cancer mask, and heatmap.
-Check “Broken Patches” for processing errors.
+  * Tissue Slice
+  * Cancer Mask Overlay
+  * Risk Heatmap
+* See logs for unprocessed patches
 
-Patch Prediction
+### 🖼️ Patch Prediction
 
-Upload a tissue patch.
-View prediction (“Cancerous”/“Not Cancerous”) and confidence.
-See image preview with styled results.
+* Upload image patch
+* See predicted label + confidence
+* Visual style:
 
-Limitations
+  * ✅ Green = Not Cancerous
+  * ❌ Red = Cancerous
 
-Paths: Hardcoded (/content/drive/MyDrive/...), needing environment adjustments.
-Prediction: Assumes filename ends with 0 or 1 for ground truth.
-Features: Disabled components (e.g., Vision Transformer) await integration.
-Dependencies: Specific library versions required.
-Errors: Robust but may fail on edge cases (e.g., missing models).
+---
 
-These are opportunities for future improvements, and I’m ready to address them.
-Notebooks
-The repository includes:
+## ⚠️ Limitations
 
-BREAST CANCER DETECTION AND VISUALISATION.ipynb: Data analysis and model development.
-BREAST TISSUE VISUAL APP.ipynb: Streamlit app prototyping.
+| Area                   | Current Limitation                                                           |
+| ---------------------- | ---------------------------------------------------------------------------- |
+| File Paths             | Hardcoded paths (e.g., `/content/drive/...`) must be changed per environment |
+| Prediction Assumptions | Ground truth assumed from filename (ending in `0` or `1`)                    |
+| Feature Scope          | Advanced models like Vision Transformers are not yet integrated              |
+| Robustness             | May not handle missing/invalid inputs in some edge cases                     |
+| Privacy                | Dataset and model not included (available on request)                        |
 
-These provide insights into the project’s development process.
-Contact
-I’m passionate about deep learning in healthcare. Reach out to discuss this project or collaboration:
+---
 
+## 📓 Notebooks
 
-- Email: alexdata2022@gmail.com
-- LinkedIn: Your LinkedIn Profile
-- GitHub: https://github.com/AkinwandeSlim
+| Notebook                                          | Description                      |
+| ------------------------------------------------- | -------------------------------- |
+| `BREAST CANCER DETECTION AND VISUALISATION.ipynb` | Data exploration, model training |
+| `BREAST TISSUE VISUAL APP.ipynb`                  | UI/UX prototyping in Streamlit   |
 
+---
 
-Built with ❤️ for advancing medical diagnostics through AI.```
+## 📬 Contact
+
+💡 Interested in AI for medical diagnostics?
+📨 Reach out for collaboration or full access to the dataset and model:
+
+* 📧 **Email**: [alexdata2022@gmail.com](mailto:alexdata2022@gmail.com)
+* 🔗 **LinkedIn**: [akinwandealex](https://www.linkedin.com/in/akinwandealex)
+* 💻 **GitHub**: [AkinwandeSlim](https://github.com/AkinwandeSlim)
+
+---
+
+## ❤️ Built with Passion
+
+This project is a testament to using **AI for good**. By combining technical depth with real-world usability, it brings us one step closer to better, earlier cancer diagnosis.
+
+---
+
